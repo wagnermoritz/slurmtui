@@ -1,0 +1,184 @@
+Screen {
+    layout: vertical;
+}
+
+#tabs {
+    height: 1fr;
+}
+
+TabPane {
+    padding: 0;
+}
+
+.filter-bar {
+    height: 3;
+    margin: 0 1;
+}
+
+.filter-input {
+    width: 2fr;
+}
+
+.extra-input {
+    width: 1fr;
+    max-width: 40;
+}
+
+.status-line {
+    height: auto;
+    min-height: 1;
+    padding: 0 1;
+    color: $text-muted;
+}
+
+.status-line.error {
+    color: $error;
+}
+
+DataTable {
+    height: 1fr;
+    border: solid $secondary;
+}
+
+DataTable:focus {
+    border: solid $accent;
+}
+
+#footer-bar {
+    dock: bottom;
+    height: 1;
+}
+
+#footer-bar Footer {
+    dock: none;
+    width: 1fr;
+}
+
+#footer-right {
+    width: auto;
+    height: 1;
+    padding: 0 1;
+    color: $text-muted;
+    background: $panel;
+}
+
+/* cluster tab */
+.cluster-scroll {
+    height: 1fr;
+    padding: 0 1;
+}
+
+/* modal screens */
+ModalScreen {
+    align: center middle;
+}
+
+.modal-box {
+    width: 90%;
+    height: 90%;
+    border: round $secondary;
+    background: $surface;
+    padding: 0 1;
+}
+
+.modal-box.small {
+    width: 70;
+    height: auto;
+    max-height: 80%;
+}
+
+.modal-title {
+    height: 1;
+    text-style: bold;
+    padding: 0 1;
+}
+
+.modal-actions {
+    height: 3;
+    align: right middle;
+}
+
+.modal-actions Button {
+    margin: 0 1;
+    min-width: 12;
+}
+
+.modal-body {
+    height: 1fr;
+}
+
+.modal-hint {
+    color: $text-muted;
+    padding: 0 1;
+}
+
+.section-title {
+    text-style: bold;
+    color: $accent;
+    margin: 1 0 0 0;
+}
+
+.section-body {
+    margin: 0 0 0 1;
+}
+
+.message {
+    padding: 0 1;
+}
+
+.message.error {
+    color: $error;
+}
+
+.message.success {
+    color: $success;
+}
+
+/* settings */
+.settings-label {
+    height: 1;
+    margin: 1 0 0 1;
+    color: $accent;
+}
+
+.settings-row {
+    height: 3;
+}
+
+.settings-row Select {
+    width: 1fr;
+}
+
+.settings-row Input {
+    width: 1fr;
+}
+
+.settings-row > Static {
+    width: 24;
+    content-align: left middle;
+    height: 3;
+}
+
+/* plain one-line checkbox without Textual's tall border */
+.settings-check {
+    height: 1;
+    margin: 1 0 0 1;
+    padding: 0;
+    border: none;
+    background: transparent;
+}
+
+.settings-check:focus {
+    border: none;
+    background: transparent;
+}
+
+SelectionList {
+    height: auto;
+    max-height: 14;
+    border: round $secondary;
+}
+
+Collapsible {
+    margin: 0 0 0 0;
+}

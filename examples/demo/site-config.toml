@@ -1,0 +1,50 @@
+# Site configuration of the demo cluster (`slurmtui --demo`), and a complete example of a site file.
+#
+# With --demo it replaces /etc/slurmtui/config.toml and ~/.config/slurmtui/config.toml;
+# --config FILE still layers your settings on top (see user-config.toml).
+# `python tools/gen_docs.py` copies it to src/slurmtui/demo/ for the installed package.
+# To try an edit without copying:
+#
+#     slurmtui --demo --site-config examples/demo/site-config.toml
+
+[general]
+memory_unit = "G"
+
+[refresh]                   # the simulated queue moves every few seconds
+auto = true
+active_tab_seconds = 10
+inactive_tabs_seconds = 30
+
+# Compute nodes n01-n12 (partitions cpu, long; three CPU generations) and GPU nodes
+# g01-g06 (partition gpu; A100 and H200) form one node group: one CLUSTER subtab, one
+# pair of CPU/GPU-hour columns. Sites with several machines add one [[node_groups]]
+# entry per machine (see docs/configuration.md).
+[[node_groups]]
+name = "demo"
+nodes = ["*"]
+partitions = ["*"]
+
+# Node features look like "AMD,EPYC7543,A100,A100-40GB,Infiniband" or
+# "Intel,Xeon,Platinum8568Y,H200,H200-141GB,Infiniband".
+[hardware.gpu_type]
+rules = [{ feature = "re:^([A-Z0-9]+)-(\\d+GB)$", label = "{feature.1} {feature.2}" }]
+fallback = "{gres_type}"
+
+[hardware.cpu_type]
+rules = [{ features = "re:(?:^|,)(Intel|AMD),(?:Xeon,)?([A-Za-z]*\\d[A-Za-z0-9]*)(?:,|$)", label = "{features.1} {features.2}" }]
+fallback = "{arch} {cpus}c"
+
+# The accounting sweeps cost nothing on a simulated cluster, so their columns are on:
+# jobs in the last 24h/7d per user, CPU/GPU hours per account.
+[sources]
+recent_jobs = { enabled = true, ttl = 60 }
+account_usage = { enabled = true, ttl = 60, default_window = "7d", max_window = "14d" }
+
+[tabs.users]
+columns = ["user", "jobs_running", "jobs_pending", "cpus", "gpus", "memory", "jobs_24h", "jobs_7d", "raw_usage", "fairshare", "nodes"]
+
+[tabs.accounts]
+columns = [
+  "account", "shares", "usage", "level_fs", "fairshare", "jobs_running", "jobs_pending",
+  "cpus", "gpus", "memory", "members_active", "oldest_pending", "cpu_hours:*", "gpu_hours:*",
+]

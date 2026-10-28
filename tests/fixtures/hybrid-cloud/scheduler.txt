@@ -1,0 +1,62 @@
+*******************************************************
+sdiag output at Mon Oct 19 14:30:00 2026 (1792420200)
+Data since      Fri Oct 16 14:30:00 2026 (1792161000)
+*******************************************************
+Server thread count:  3
+RPC queue enabled:    0
+Agent queue size:     0
+Agent count:          0
+Agent thread count:   0
+DBD Agent queue size: 0
+
+Jobs submitted: 18342
+Jobs started:   17911
+Jobs completed: 17654
+Jobs canceled:  412
+Jobs failed:    0
+Jobs pending:   130
+Jobs running:   276
+
+Job states ts:  Mon Oct 19 14:30:00 2026 (1792420190)
+
+Main schedule statistics (microseconds):
+	Last cycle:   41235
+	Max cycle:    1287654
+	Total cycles: 182334
+	Mean cycle:   53112
+	Mean depth cycle:  89
+	Cycles per minute: 42
+	Last queue length: 130
+
+Main scheduler exit:
+	End of job queue:  14012
+	Hit default_queue_depth: 0
+	Hit sched_max_job_start: 0
+	Blocked on licenses: 0
+	Hit max_rpc_cnt: 0
+	Timeout (max_sched_time): 0
+
+Backfilling stats
+	Total backfilled jobs (since last slurm start): 9123
+	Total backfilled jobs (since last stats cycle start): 371
+	Total backfilled heterogeneous job components: 0
+	Total cycles: 4321
+	Last cycle when: Mon Oct 19 14:30:00 2026 (1792420100)
+	Last cycle: 2213456
+	Max cycle:  8123456
+	Mean cycle: 1456789
+	Last depth cycle: 613
+	Last depth cycle (try sched): 142
+	Depth Mean: 598
+	Depth Mean (try depth): 131
+	Last queue length: 130
+	Queue length mean: 540
+	Last table size: 118
+	Mean table size: 102
+
+Latency for 1000 calls to gettimeofday(): 23 microseconds
+
+Remote Procedure Call statistics by message type
+	REQUEST_PARTITION_INFO                  ( 2009) count:122338 ave_time:120    total_time:14680560
+	REQUEST_JOB_INFO_SINGLE                 ( 2021) count:98765  ave_time:1850   total_time:182715250
+	REQUEST_NODE_INFO                       ( 2007) count:65432  ave_time:2100   total_time:137407200

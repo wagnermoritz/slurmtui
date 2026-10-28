@@ -1,0 +1,27 @@
+# Example user configuration, written for the demo cluster:
+#
+#     slurmtui --demo --config examples/demo/user-config.toml
+#
+# On a real cluster the same file goes to ~/.config/slurmtui/config.toml.
+# Every key is optional; unknown keys are reported.
+
+[general]
+theme = "textual-dark"      # any Textual theme; the settings screen (ctrl+s) lists them
+memory_unit = "auto"        # auto | G | M
+duration_style = "compact"  # slurm (D-HH:MM:SS) | compact (2d 3h)
+
+[refresh]
+active_tab_seconds = 5      # the demo's own site file sets 10
+
+[tabs.jobs]
+filter = "@me"              # start with only your own jobs (user "demo" in the demo)
+sort = "time desc"
+
+[tabs.nodes]
+partitions = "gpu"          # initial partition selection of the NODES tab
+
+[tabs.history]
+window = "3d"
+
+[detail]
+stdout_tail_lines = 80

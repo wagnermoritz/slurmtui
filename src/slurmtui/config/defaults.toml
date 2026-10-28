@@ -1,0 +1,166 @@
+# Packaged defaults of slurmtui. Override them in a site or user config.
+# Print them with:  slurmtui dump-config --defaults
+
+ungrouped_name = "other"
+
+[general]
+theme = "textual-dark"
+memory_unit = "auto"
+duration_style = "slurm"
+datetime_format = "%Y-%m-%d %H:%M"
+max_rows = 2000
+log_level = "warning"
+
+[commands]
+timeout_seconds = 60
+path_prefix = ""
+env = {}
+
+[refresh]
+auto = false
+active_tab_seconds = 30
+inactive_tabs_seconds = 120
+on_tab_switch = true
+
+[sources]
+nodes = { ttl = 15 }
+partitions = { ttl = 300 }
+jobs = { ttl = 15 }
+reservations = { ttl = 120 }
+shares = { ttl = 120 }
+scheduler = { ttl = 60 }
+history = { ttl = 60, default_window = "7d", max_window = "90d", max_rss_unit = "auto" }
+recent_jobs = { enabled = false, ttl = 900, window = "7d" }
+account_usage = { enabled = false, ttl = 900, default_window = "7d", max_window = "30d" }
+
+[[node_groups]]
+name = "cluster"
+nodes = ["*"]
+partitions = ["*"]
+
+[hardware.gpu_type]
+rules = []
+fallback = "{gres_type}"
+
+[hardware.cpu_type]
+rules = []
+fallback = "{arch} {cpus}c"
+
+[usage]
+gpu_hours_when = "gpu_allocated"
+gpu_partitions = []
+count_cpu_hours_of_gpu_jobs = false
+
+[styles]
+usage_bar = { style = "gradient", width = 40, warn = 0.7, critical = 0.9 }
+efficiency = { warn = 0.5, critical = 0.2 }
+
+[styles.node_state]
+idle = "green"
+mixed = "yellow"
+allocated = "yellow"
+completing = "yellow"
+planned = "yellow"
+reserved = "yellow"
+down = "red"
+drained = "red"
+draining = "red"
+fail = "red"
+failing = "red"
+maint = "red"
+unknown = "red"
+error = "red"
+future = "dim"
+default = ""
+
+[styles.node_state_flags]
+powered_down = "dim"
+powering_up = "italic"
+powering_down = "dim"
+not_responding = "red"
+maintenance = "red"
+reboot_requested = "yellow"
+reboot_issued = "yellow"
+
+[styles.job_state]
+RUNNING = "green"
+PENDING = "yellow"
+COMPLETING = "yellow"
+CONFIGURING = "yellow"
+SUSPENDED = "yellow"
+REQUEUED = "yellow"
+COMPLETED = "green"
+FAILED = "red"
+CANCELLED = "red"
+TIMEOUT = "red"
+OUT_OF_MEMORY = "red"
+NODE_FAIL = "red"
+PREEMPTED = "red"
+BOOT_FAIL = "red"
+DEADLINE = "red"
+default = ""
+
+[detail]
+stdout_tail_lines = 50
+stdout_tail_max_kb = 256
+stdout_tail_line_len = 400
+use_seff = true
+
+[keys]
+quit = "ctrl+q"
+help = "question_mark"
+refresh = ["ctrl+r", "f5"]
+refresh_all = "ctrl+shift+r"
+toggle_auto_refresh = "ctrl+t"
+focus_filter = "slash"
+clear_filter = "ctrl+l"
+next_tab = "ctrl+right"
+prev_tab = "ctrl+left"
+my_jobs = "ctrl+n"
+settings = "ctrl+s"
+close = "escape"
+sort_dialog = "ctrl+o"
+restore_filter = "ctrl+z"
+
+[tabs.nodes]
+enabled = true
+title = "NODES"
+columns = ["name", "state", "avail", "partitions", "jobs", "cpus", "cpu_type", "memory", "gpus", "gpu_type", "max_time"]
+sort = "name"
+filter = ""
+partitions = ""
+
+[tabs.jobs]
+enabled = true
+title = "JOBS"
+columns = ["job_id", "partition", "name", "user", "state", "time", "time_limit", "cpus", "gpus", "memory", "priority", "nodes", "node_list"]
+sort = "state, priority desc"
+filter = ""
+
+[tabs.users]
+enabled = true
+title = "USERS"
+columns = ["user", "jobs_running", "jobs_pending", "cpus", "gpus", "memory", "usage", "fairshare", "nodes", "partitions"]
+sort = "jobs_running desc"
+filter = ""
+
+[tabs.accounts]
+enabled = true
+title = "ACCOUNTS"
+columns = ["account", "shares", "usage", "level_fs", "jobs_running", "jobs_pending", "cpus", "gpus", "memory", "members_active", "oldest_pending"]
+sort = "usage desc"
+filter = ""
+
+[tabs.history]
+enabled = true
+title = "HISTORY"
+columns = ["job_id", "name", "partition", "state", "exit_code", "elapsed", "cpus", "req_mem", "max_rss", "mem_eff", "cpu_eff", "end"]
+sort = "end desc"
+filter = ""
+window = ""
+
+[tabs.cluster]
+enabled = true
+title = "CLUSTER"
+panels = ["gpus", "cpus", "memory", "nodes", "jobs", "reservations", "scheduler"]
+pending_reasons_shown = 10
